@@ -1,0 +1,30 @@
+class Solution {
+public:
+bool canConstruct(string ransomNote, string magazine) {
+    int ranlen=ransomNote.length();
+    int maglen=magazine.length();
+    if(ranlen==0)
+        return true;
+    if(ranlen!=0&&maglen==0)
+        return false;
+    int flag[maglen]={0};
+    int i,j;
+    for(i=0;i<ranlen;i++)
+    {
+        for(j=0;j<maglen;j++)
+        {
+            if(ransomNote[i]==magazine[j])
+            {
+                flag[j]++;
+                if(flag[j]>1)
+                    continue;
+                else
+                    break;
+            }
+        }
+        if(j==maglen)
+            return false;
+    }
+    return true;
+    }
+};
