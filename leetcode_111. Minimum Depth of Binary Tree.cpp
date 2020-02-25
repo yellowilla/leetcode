@@ -14,22 +14,17 @@ public:
         {
             return 0;
         }
-
-        int h = 0;
-        int lh, rh;
+        
+        int h;
         if (root->left == NULL || root->right == NULL)
         {
-            lh = minDepth(root->left);
-            rh = minDepth(root->right);
-            h = lh > rh ? lh + 1 : rh + 1;    
+            h = max(minDepth(root->left), minDepth(root->right)) + 1;
         }
-        else 
+        else
         {
-            lh = minDepth(root->left);
-            rh = minDepth(root->right);
-            h = lh < rh ? lh + 1 : rh + 1;
+            h = min(minDepth(root->left), minDepth(root->right)) + 1;
         }
-
+        
         return h;
     }
 };
