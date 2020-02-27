@@ -1,4 +1,43 @@
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    vector<int> postorderTraversal(TreeNode* root) {
+        vector<int> res;
 
+        if (root == NULL)
+        {
+            return res;
+        }
+
+        devide(root, res);
+        return res;
+    }
+
+    void devide(TreeNode*& root, vector<int>& res)
+    {
+        if (root == NULL)
+        {
+            return ;
+        }
+
+        devide(root->left, res);
+        devide(root->right, res);
+        res.push_back(root->val);
+
+        return ;
+    }
+};
+
+
+////////////////////////////////////////////////////////////////////
 /**后序遍历非递归
 *   后序遍历即为“左右根”，反过来是“根右左”
 *   与先序遍历“根左右”遍历方法一样，
