@@ -1,17 +1,3 @@
-class Solution {
-public:
-    int hammingWeight(uint32_t n) {
-        int count = 0;
-        while(n)
-        {
-            n = n & (n - 1);
-            count++;
-        }
-        return count;
-    }
-};
-
-
 /*"&" - 按位与，同时为"1"时才为1；
   "|" - 按位或，>=1个为"1",则为1；
   "^" - 异或， 相异为1，同为0；
@@ -25,3 +11,34 @@ public:
   /*按位与
     1， 奇偶性判断 - a&1;
     2, 判断是否是2的正整数幂 - (!(n&(n-1)))&&n; */ 
+
+class Solution {
+public:
+    int hammingWeight(uint32_t n) {
+        int count = 0;
+        while(n)
+        {
+            n = n & (n - 1);
+            count++;
+        }
+        return count;
+    }
+};
+
+//////////////////////////////////////
+public:
+    int hammingWeight(uint32_t n) 
+    {
+        int res = 0;
+        uint32_t cur = n;
+        while (cur)
+        {
+            if (cur & 1)
+            {
+                res++;
+            }
+            cur = cur >> 1;
+        }
+        
+        return res;
+    }
