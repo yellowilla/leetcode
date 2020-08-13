@@ -1,0 +1,52 @@
+/*
+经典题，链表的k路归并，类似于排队上厕所，哪个队进去一个，哪个队就往前补一个
+1，必须是k个有序链表
+2，使用堆,即priority_queue，
+3，使用函数对象时，注意，返回值为true时，代表在外部，a < b
+*/
+
+
+class MyLess {
+public:
+    bool operator() (ListNode* a, ListNode* b) {
+        if (a->val > b->val){
+            return true; //即，在这种条件下，满足外部的a < b
+        }
+        else{
+            return false;
+        }
+    }
+};
+
+class Solution {
+public:
+    ListNode* mergeKLists(vector<ListNode*>& lists) {
+        ListNode new_head(0);
+        ListNode* cur = &new_head;
+        
+        int lth = lists.size();
+        if (lth == 0){
+            return cur->next;
+        }
+        
+        priority_queue<ListNode*, vector<ListNode*>, MyLess> p;
+        for (int i = 0; i < lth; i++){
+            if (lists[i] != NULL) {
+                p.push(lists[i]);
+            }
+        }
+        
+        ListNode* min;
+        while (!p.empty()) {
+            min = p.top();
+            p.pop();
+            cur->next = min;
+            cur = cur->next;
+            if (min->next != NULL) {
+                p.push(min->next);
+            }
+        }
+        
+        return new_head.next;
+    }
+};
