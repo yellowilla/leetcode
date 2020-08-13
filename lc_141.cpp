@@ -1,3 +1,9 @@
+/*
+链表判断有环问题，都是两个指针，一快一慢
+在换中一定会相遇，因为慢的走完1圈时，快的走完2圈，一定有快的超过慢的的相遇点
+*/
+
+
 /**
  * Definition for singly-linked list.
  * struct ListNode {
